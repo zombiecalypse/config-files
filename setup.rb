@@ -24,5 +24,5 @@ csv.each do |row|
   if orig.relative?
     orig = home.join(orig).realdirpath
   end
-  FileUtils.ln_s(in_path, orig) unless orig.exist?
+  FileUtils.ln_sf(in_path, orig)
 end
