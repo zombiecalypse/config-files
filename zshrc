@@ -73,5 +73,12 @@ export PATH="$PATH:/home/aaron/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sb
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 alias p="git status"
+alias gl="git log"
 
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
+
+if [ -f /usr/share/autojump/autojump.sh ]; then
+  . /usr/share/autojump/autojump.sh
+else
+  echo "Please install autojump"
+fi
