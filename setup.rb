@@ -16,11 +16,9 @@ home.join('.bin', 'conf').chmod(0755)
 csv = open(confpath.join('config-files.list')) {|f| CSV.parse(f, headers: true)}
 original, inrel = csv.headers
 
-mount = []
-
 csv.each do |row|
   orig = Pathname.new(row[original])
-  in_path = confpath.join((row[inrel])).realdirpath
+  in_path = confpath.join(row[inrel]).realdirpath
   if orig.relative?
     orig = home.join(orig).realdirpath
   end

@@ -49,6 +49,9 @@ syntax on
 "    \| exe "normal! g'\"" | endif
 "endif
 
+
+let mapleader = ","
+
 " Uncomment the following to have Vim load indentation rules according to the
 " detected filetype. Per default Debian Vim only load filetype specific
 " plugins.
@@ -75,14 +78,16 @@ set mouse=a	" Enable mouse usage (all modes) in terminals
 set acd
 set dir=/tmp,.,/var/tmp
 set fo=tcroq
-colorscheme default
+colorscheme pyte
 
 set modeline
+set tabstop=2 shiftwidth=2 expandtab
+set nu
 "  ---------------------------------------------------------------------------
 "  hotkeys
 "  ---------------------------------------------------------------------------
 map		<silent>	<F2>	:write<CR>
-map		<silent>	<F3>	:Explore<CR>
+map		<silent>	<F3>	:Gdiff<CR>
 map 		<silent>	<F4>	:Gstatus<CR>
 map 		<silent>	<F5>	:Gcommit<CR>
 imap 		<silent>	<F4>	:Gstatus<CR>
@@ -156,7 +161,28 @@ let g:ScreenImpl = 'Tmux'
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+map <leader>a :A<CR>
+map <leader>A :AS<CR>
+" Copy to X CLIPBOARD
+map <leader>cp :w !xsel -i -p<CR>
+" Paste from X CLIPBOARD
+map <leader>pp :r!xsel -p<CR>
+set wildmode=longest,list,full
+set wildmenu
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+let Grep_Default_Options = '-i' 
+let Grep_Skip_Files = '*.bak *~ *.jar' 
+map <silent> <C-Right> <c-w>l
+map <silent> <C-Left> <c-w>h
+map <silent> <C-Up> <c-w>k
+map <silent> <C-Down> <c-w>j
+map <silent> <C-L> <c-w>l
+map <silent> <C-H> <c-w>h
+map <silent> <C-K> <c-w>k
+map <silent> <C-J> <c-w>j
+
 
 nmap <silent> <C-k> <C-w>k
 nmap <silent> <C-j> <C-w>j
@@ -165,9 +191,25 @@ nmap <silent> <C-l> <C-w>l
 nmap <silent> <F6> :FSHere<cr>
 nmap <silent> <leader>h :FSHere<cr>
 nmap <silent> <C-g> :nohl<CR><C-l>
-nmap <silent> <leader>a :A<CR>
 
-nmap ,s ^[:w^M:!aspell -c --dont-backup "%"^M:e! "%"^M^M
-nmap <silent> <leader>g :! flux google-chrome "https://google.com/\#q=<cword>"<CR>
-
-set tags=./tags;/
+let g:rails_projections = {
+\  "app/jobs/*.rb": {
+\    "command": "jobs",
+\    "template": "class %S < BaseJob\nend",
+\    "test": [
+\      "spec/jobs/%s_spec.rb"] },
+\  "app/domain/*.rb": {
+\    "command": "domain",
+\    "template": "module %S\nend",
+\    "test": [
+\      "spec/domain/%s_spec.rb"] },
+\  "app/utils/*.rb": {
+\    "command": "utils",
+\    "template": "module %S\nend",
+\    "test": [
+\      "spec/utils/%s_spec.rb"] },
+\  "config/*.rb": {
+\    "command": "config",},
+\  "test/blueprints/*.rb": {
+\    "command": "blueprint",},
+\ }
