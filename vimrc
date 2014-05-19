@@ -1,21 +1,20 @@
 filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" BEGIN Bundles
+call vundle#begin()
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git'
 Bundle 'christoomey/vim-tmux-navigator'
-
-" END Bundles
-
-let mapleader=","
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+call vundle#end()
 
 filetype plugin indent on
+let mapleader=","
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
@@ -88,10 +87,8 @@ set nu
 "  ---------------------------------------------------------------------------
 map		<silent>	<F2>	:write<CR>
 map		<silent>	<F3>	:Gdiff<CR>
-map 		<silent>	<F4>	:Gstatus<CR>
-map 		<silent>	<F5>	:Gcommit<CR>
-imap 		<silent>	<F4>	:Gstatus<CR>
-imap 		<silent>	<F5>	:Gcommit<CR>
+map 		<silent>	<F5>	:Git cola<CR>
+imap 		<silent>	<F5>	<Esc><Esc>:Git cola<CR>
 noremap		<silent>	<F11>	<Esc><Esc>:TlistToggle<CR>
 inoremap	<silent>	<F11>	<Esc><Esc>:TlistToggle<CR>
 "
@@ -213,3 +210,4 @@ let g:rails_projections = {
 \  "test/blueprints/*.rb": {
 \    "command": "blueprint",},
 \ }
+let NERDTreeHijackNetrw=1
