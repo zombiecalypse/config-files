@@ -100,9 +100,8 @@ alias o='xdg-open'
 alias pa='cd $pa'
 alias pat='cd $pat'
 alias pav='cd $pav'
-alias ls='ls -h --color=auto'
-alias ll='ls -lh --color=auto'
-alias la='ls -a --color=auto'
+alias ls='ls -h'
+alias ll='ls -lh'
 
 alias opa='oproj $pa'
 alias gvim='UBUNTU_MENUPROXY= gvim'
@@ -114,6 +113,7 @@ function flux() {
 alias t='git tree'
 alias gl='git log'
 alias gt='git tree'
+alias gc='git cola'
 alias clip='xclip -i -selection clipboard'
 export GREP_COLOR='01;31'
 alias today="date +'%y-%m-%d' "
@@ -123,10 +123,8 @@ alias rc='rails c'
 alias rs='rails s'
 alias :q="echo \"Calm down, you're not in vim\""
 alias gg='gitg'
-alias gc='git cola'
 alias clip='xclip -selection clipboard'
 alias zz='zeus'
 alias push='rspec spec && git push'
 alias z='j'
 export GREP_OPTIONS="$GREP_OPTIONS --color=auto --exclude-dir=.git --binary-files=without-match"
-alias rt="rake parallel:spec RAILS_ENV=test" 
