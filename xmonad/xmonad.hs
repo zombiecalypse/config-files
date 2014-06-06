@@ -7,14 +7,15 @@
      PatternGuards,
      ScopedTypeVariables,
      TypeSynonymInstances,
-     UndecidableInstances
+     UndecidableInstances,
+     PackageImports
      #-}
 {-# OPTIONS_GHC -W -fwarn-unused-imports -fno-warn-missing-signatures #-}
  
 import Control.Applicative
 import Control.Monad
 import Control.Monad.Instances ()
-import Control.Monad.Writer
+import "mtl" Control.Monad.Writer
 import Data.List
 import Data.Maybe
 import Data.Traversable(traverse)
@@ -23,50 +24,50 @@ import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import qualified XMonad.Util.ExtensibleState as XS
 import System.IO
-import XMonad
-import XMonad.Actions.Volume
-import XMonad.Actions.DwmPromote
-import XMonad.Actions.FloatSnap
-import XMonad.Actions.GridSelect
-import XMonad.Actions.Search
-import XMonad.Actions.SpawnOn
-import XMonad.Actions.Submap
-import XMonad.Actions.TopicSpace
-import XMonad.Actions.UpdatePointer
-import XMonad.Actions.Warp
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.UrgencyHook
-import XMonad.Layout.BoringWindows
-import XMonad.Layout.Drawer
-import XMonad.Layout.Grid
-import XMonad.Layout.IM
-import XMonad.Layout.LayoutHints
-import XMonad.Layout.LayoutModifier
-import XMonad.Layout.Magnifier
-import XMonad.Layout.Master
-import XMonad.Layout.Mosaic
-import XMonad.Layout.MosaicAlt
-import XMonad.Layout.MouseResizableTile
-import XMonad.Layout.Named
-import XMonad.Layout.NoBorders
-import XMonad.Layout.PerWorkspace
-import XMonad.Layout.Simplest
-import XMonad.Layout.SimplestFloat
-import XMonad.Layout.SubLayouts
-import XMonad.Layout.Tabbed
-import XMonad.Layout.TrackFloating
-import XMonad.Layout.WindowNavigation
-import XMonad.Prompt
-import XMonad.Prompt.RunOrRaise
-import XMonad.Prompt.Ssh
-import XMonad.Prompt.Window
-import XMonad.Prompt.XMonad
-import XMonad.Util.EZConfig
-import XMonad.Util.Replace
-import XMonad.Util.Run
+import "xmonad-extras" XMonad.Actions.Volume
+import "xmonad" XMonad
+import "xmonad" XMonad.Core
+import "xmonad" XMonad.Actions.FloatSnap
+import "xmonad" XMonad.Actions.GridSelect
+import "xmonad" XMonad.Actions.Search
+import "xmonad" XMonad.Actions.SpawnOn
+import "xmonad" XMonad.Actions.Submap
+import "xmonad" XMonad.Actions.TopicSpace
+import "xmonad" XMonad.Actions.UpdatePointer
+import "xmonad" XMonad.Actions.Warp
+import "xmonad" XMonad.Hooks.DynamicLog
+import "xmonad" XMonad.Hooks.EwmhDesktops
+import "xmonad" XMonad.Hooks.ManageDocks
+import "xmonad" XMonad.Hooks.ManageHelpers
+import "xmonad" XMonad.Hooks.UrgencyHook
+import "xmonad" XMonad.Layout.BoringWindows
+import "xmonad" XMonad.Layout.Drawer
+import "xmonad" XMonad.Layout.Grid
+import "xmonad" XMonad.Layout.IM
+import "xmonad" XMonad.Layout.LayoutHints
+import "xmonad" XMonad.Layout.LayoutModifier
+import "xmonad" XMonad.Layout.Magnifier
+import "xmonad" XMonad.Layout.Master
+import "xmonad" XMonad.Layout.Mosaic
+import "xmonad" XMonad.Layout.MosaicAlt
+import "xmonad" XMonad.Layout.MouseResizableTile
+import "xmonad" XMonad.Layout.Named
+import "xmonad" XMonad.Layout.NoBorders
+import "xmonad" XMonad.Layout.PerWorkspace
+import "xmonad" XMonad.Layout.Simplest
+import "xmonad" XMonad.Layout.SimplestFloat
+import "xmonad" XMonad.Layout.SubLayouts
+import "xmonad" XMonad.Layout.Tabbed
+import "xmonad" XMonad.Layout.TrackFloating
+import "xmonad" XMonad.Layout.WindowNavigation
+import "xmonad" XMonad.Prompt
+import "xmonad" XMonad.Prompt.RunOrRaise
+import "xmonad" XMonad.Prompt.Ssh
+import "xmonad" XMonad.Prompt.Window
+import "xmonad" XMonad.Prompt.XMonad
+import "xmonad" XMonad.Util.EZConfig
+import "xmonad" XMonad.Util.Replace
+import "xmonad" XMonad.Util.Run
 import qualified XMonad.Util.Dzen as D
  
  
@@ -87,6 +88,7 @@ myConfig hs = let c = defaultConfig {
     , modMask = mod4Mask
     , startupHook = do
         return () -- supposedly to avoid inf. loops with checkKeymap
+        startupApplications
         checkKeymap (myConfig []) (myKeys c)
     , terminal = "gnome-terminal"
     , logHook = do
@@ -97,7 +99,7 @@ myConfig hs = let c = defaultConfig {
             myPP{ ppTitle = const "" }
             hs
         updatePointer (TowardsCentre 0.2 0.2)
-    , handleEventHook = ewmhDesktopsEventHook <+> fullscreenEventHook <+> focusFollow <+>
+    , handleEventHook = docksEventHook <+> ewmhDesktopsEventHook <+> fullscreenEventHook <+> focusFollow <+>
                     (\e -> case e of
                         PropertyEvent{ ev_window = w } -> do
                             isURXVT <- runQuery (className =? "URxvt") w
@@ -419,3 +421,19 @@ queryMerge pGrp = do
     idHook
 
 alert = D.dzenConfig return . show
+
+pgrep pattern = do 
+  prog <- runProcessWithInput "pgrep" [pattern] ""
+  return $ map (read :: String -> Integer) $  lines prog
+
+spawnIfNotRunning p = do
+  run <- pgrep p
+  possiblyRun run
+  where
+    possiblyRun [] = spawnHere p
+    possiblyRun (x:xs) = return ()
+
+startupApplications = do
+  spawnIfNotRunning "trayer"
+  spawnIfNotRunning "np-applet"
+  spawnIfNotRunning "SpiderOak"

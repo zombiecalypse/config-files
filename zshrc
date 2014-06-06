@@ -70,6 +70,11 @@ export PATH="$PATH:/home/aaron/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sb
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+unsetopt correct_all
+
+export VISUAL=vim
+export EDITOR=$VISUAL
+
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 alias p="git status"
@@ -82,3 +87,46 @@ if [ -f /usr/share/autojump/autojump.sh ]; then
 else
   echo "Please install autojump"
 fi
+
+
+autoload -U compinit && compinit -u
+
+export pa="/home/akarper/Projects/Puzzle/weal_rails/"
+export pav="/home/akarper/Projects/Puzzle/Versand_Modul/"
+export pat="/home/akarper/Projects/Puzzle/weal_test/"
+alias time="/usr/bin/time"
+alias p='git status'
+alias o='xdg-open'
+alias pa='cd $pa'
+alias pat='cd $pat'
+alias pav='cd $pav'
+alias ls='ls -h --color=auto'
+alias ll='ls -lh --color=auto'
+alias la='ls -a --color=auto'
+
+alias opa='oproj $pa'
+alias gvim='UBUNTU_MENUPROXY= gvim'
+alias opav='oproj $pav'
+
+function flux() {
+  ( "$@" 2>&1 >/dev/null & )
+}
+alias t='git tree'
+alias gl='git log'
+alias gt='git tree'
+alias clip='xclip -i -selection clipboard'
+export GREP_COLOR='01;31'
+alias today="date +'%y-%m-%d' "
+zstyle ':completion:*' use-cache on
+alias tst="rspec \`git diff-index HEAD --name-only | grep _spec.rb\`"
+alias rc='rails c'
+alias rs='rails s'
+alias :q="echo \"Calm down, you're not in vim\""
+alias gg='gitg'
+alias gc='git cola'
+alias clip='xclip -selection clipboard'
+alias zz='zeus'
+alias push='rspec spec && git push'
+alias z='j'
+export GREP_OPTIONS="$GREP_OPTIONS --color=auto --exclude-dir=.git --binary-files=without-match"
+alias rt="rake parallel:spec RAILS_ENV=test" 

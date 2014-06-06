@@ -1,4 +1,0 @@
-
-xmonad.hs:153:1: Warning: Defined but not used: `expandEdges'
-
-xmonad.hs:301:1: Warning: Defined but not used: `multiPP'

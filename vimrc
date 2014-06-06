@@ -2,16 +2,14 @@ filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-" BEGIN Bundles
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git'
 Bundle 'christoomey/vim-tmux-navigator'
-
-" END Bundles
+Bundle 'rking/ag.vim'
+Bundle 'AndrewRadev/splitjoin.vim'
 
 let mapleader=","
 
@@ -160,7 +158,11 @@ let NERDTreeIgnore = ['\~$', '\.png$', '\.svg$', '\.ogg$', '\.o$', '\.hi$', '\.l
 let g:ScreenImpl = 'Tmux'
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
+autocmd! BufNewFile,BufRead *.rb setlocal ft=ruby
+autocmd! BufNewFile,BufRead Gemfile setlocal ft=ruby
 
+map <leader>s :SplitjoinSplit<CR>
+map <leader>j :SplitjoinJoin<CR>
 map <leader>a :A<CR>
 map <leader>A :AS<CR>
 " Copy to X CLIPBOARD
@@ -193,6 +195,11 @@ nmap <silent> <leader>h :FSHere<cr>
 nmap <silent> <C-g> :nohl<CR><C-l>
 
 let g:rails_projections = {
+\  "app/models/api/*.rb": {
+\    "command": "api",
+\    "template": "module Api\n\tclass %S\n\tend\nend",
+\    "test": [
+\      "spec/models/api/%s_spec.rb"] },
 \  "app/jobs/*.rb": {
 \    "command": "jobs",
 \    "template": "class %S < BaseJob\nend",
@@ -208,7 +215,7 @@ let g:rails_projections = {
 \    "template": "module %S\nend",
 \    "test": [
 \      "spec/utils/%s_spec.rb"] },
-\  "config/*.rb": {
+\  "config/*": {
 \    "command": "config",},
 \  "test/blueprints/*.rb": {
 \    "command": "blueprint",},
