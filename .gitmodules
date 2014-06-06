@@ -1,0 +1,12 @@
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = ./oh-my-zsh
+[submodule "ag.vim"]
+	path = ag.vim
+	url = ./vim/bundle/ag.vim
+[submodule "sparkup"]
+	path = sparkup
+	url = ./vim/bundle/sparkup
+[submodule "splitjoin.vim"]
+	path = splitjoin.vim
+	url = ./vim/bundle/splitjoin.vim

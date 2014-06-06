@@ -4,3 +4,5 @@ xmonad-*
 xmonad.hi
 xmonad.errors
 xmonad.o
+vim/bundle/
+oh-my-zsh
