@@ -110,7 +110,6 @@ alias opav='oproj $pav'
 function flux() {
   ( "$@" 2>&1 >/dev/null & )
 }
-alias t='git tree'
 alias gl='git log'
 alias gt='git tree'
 alias gc='git cola'
@@ -127,4 +126,6 @@ alias clip='xclip -selection clipboard'
 alias zz='zeus'
 alias push='rspec spec && git push'
 alias z='j'
-export GREP_OPTIONS="$GREP_OPTIONS --color=auto --exclude-dir=.git --binary-files=without-match"
+alias ack='ack-grep'
+export GOPATH=$GOPATH:~/.gopath
+export PATH=$PATH:/usr/share/go/bin

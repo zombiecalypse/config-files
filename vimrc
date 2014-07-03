@@ -1,25 +1,22 @@
 filetype off                  " required!
-set nocompatible
 
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tpope/vim-rails.git'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'rking/ag.vim'
-Plugin 'AndrewRadev/splitjoin.vim'
-
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+Bundle 'rking/ag.vim'
+Bundle 'mileszs/ack.vim'
 call vundle#end()
 
-let mapleader=","
-
 filetype plugin indent on
+let mapleader=","
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
@@ -162,11 +159,7 @@ let NERDTreeIgnore = ['\~$', '\.png$', '\.svg$', '\.ogg$', '\.o$', '\.hi$', '\.l
 let g:ScreenImpl = 'Tmux'
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
-autocmd! BufNewFile,BufRead *.rb setlocal ft=ruby
-autocmd! BufNewFile,BufRead Gemfile setlocal ft=ruby
 
-map <leader>s :SplitjoinSplit<CR>
-map <leader>j :SplitjoinJoin<CR>
 map <leader>a :A<CR>
 map <leader>A :AS<CR>
 " Copy to X CLIPBOARD
@@ -199,11 +192,6 @@ nmap <silent> <leader>h :FSHere<cr>
 nmap <silent> <C-g> :nohl<CR><C-l>
 
 let g:rails_projections = {
-\  "app/models/api/*.rb": {
-\    "command": "api",
-\    "template": "module Api\n\tclass %S\n\tend\nend",
-\    "test": [
-\      "spec/models/api/%s_spec.rb"] },
 \  "app/jobs/*.rb": {
 \    "command": "jobs",
 \    "template": "class %S < BaseJob\nend",
@@ -219,7 +207,7 @@ let g:rails_projections = {
 \    "template": "module %S\nend",
 \    "test": [
 \      "spec/utils/%s_spec.rb"] },
-\  "config/*": {
+\  "config/*.rb": {
 \    "command": "config",},
 \  "test/blueprints/*.rb": {
 \    "command": "blueprint",},

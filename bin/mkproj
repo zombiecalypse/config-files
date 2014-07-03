@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DIR=~/Projects/$1
+
+set -e
+
+mkdir $DIR
+cd $DIR
+git init
+touch README.md
+vim README.md
+git add README.md
+git commit -m 'Initial commit'

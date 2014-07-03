@@ -1,0 +1,28 @@
+[user]
+	name = Aaron Karper\n
+	email = karper@puzzle.ch
+[alias] 
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit --color
+	b = branch
+	c = checkout
+	co = commit
+  broken = bisect run bundle exec works
+  today = log --since="6am" --author="Aaron"
+  rev = merge --no-commit
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+[sendemail]
+  smtpencryption = ssl
+  smtpserver = mail.puzzle.ch
+  smtpuser = karper@puzzle.ch
+  smtpserverport = 465
+	from = Aaron Karper <karper@puzzle.ch>
+[push]
+	default = current
+[merge]
+	keepbackup = false
+	tool = meld
+[diff]
+	tool = meld
+[pull]
+	rebase = true
