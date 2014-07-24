@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/home/aaron/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$PATH:/home/aaron/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/aaron/config/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -127,5 +127,5 @@ alias zz='zeus'
 alias push='rspec spec && git push'
 alias z='j'
 alias ack='ack-grep'
-export GOPATH=$GOPATH:~/.gopath
+export GOPATH=$GOPATH:~/.gopath:.
 export PATH=$PATH:/usr/share/go/bin
