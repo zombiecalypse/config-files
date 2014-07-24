@@ -12,6 +12,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'rking/ag.vim'
 Plugin 'spf13/vim-preview'
+Plugin 'Chiel92/vim-autoformat'
 call vundle#end()
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -73,9 +74,9 @@ set ignorecase	" Do case insensitive matching
 set smartcase	" Do smart case matching
 set incsearch	" Incremental search
 set autowrite	" Automatically save before commands like :next and :make
-set hidden	" Hide buffers when they are abandoned
 set mouse=a	" Enable mouse usage (all modes) in terminals
 set acd
+set hidden
 set dir=/tmp,.,/var/tmp
 set fo=tcroq
 set list listchars=tab:»·,trail:·,extends:↪,precedes:↩
