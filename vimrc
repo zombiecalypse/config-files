@@ -1,19 +1,19 @@
+runtime! debian.vim
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'rking/ag.vim'
-Bundle 'mileszs/ack.vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-surround'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'rking/ag.vim'
+Plugin 'spf13/vim-preview'
 call vundle#end()
+set rtp+=~/.vim/bundle/Vundle.vim
 
 filetype plugin indent on
 let mapleader=","
@@ -28,7 +28,6 @@ let mapleader=","
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
 
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
@@ -61,7 +60,6 @@ if has("autocmd")
   filetype plugin on
 endif
 
-set nohlsearch
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 
@@ -70,6 +68,7 @@ let g:haddock_browser = "/usr/bin/google-chrome"
 " differently from regular Vi. They are highly recommended though.
 set showcmd	" Show (partial) command in status line.
 set showmatch	" Show matching brackets.
+set nohlsearch
 set ignorecase	" Do case insensitive matching
 set smartcase	" Do smart case matching
 set incsearch	" Incremental search
@@ -79,6 +78,7 @@ set mouse=a	" Enable mouse usage (all modes) in terminals
 set acd
 set dir=/tmp,.,/var/tmp
 set fo=tcroq
+set list listchars=tab:»·,trail:·,extends:↪,precedes:↩
 colorscheme pyte
 
 set modeline
@@ -150,13 +150,7 @@ if filereadable("/etc/vimrc")
   source /etc/vimrc
 endif
 
-call pathogen#infect()
 let g:jedi#popup_on_dot = 0
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-map <C-n> :NERDTreeToggle<CR>
-autocmd vimenter * if !argc() | NERDTree | endif
-let NERDTreeIgnore = ['\~$', '\.png$', '\.svg$', '\.ogg$', '\.o$', '\.hi$', '\.lhs$', '\.lksh[sw]$','\.pyc$']
-let g:ScreenImpl = 'Tmux'
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 
@@ -168,9 +162,6 @@ map <leader>cp :w !xsel -i -p<CR>
 map <leader>pp :r!xsel -p<CR>
 set wildmode=longest,list,full
 set wildmenu
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
 let Grep_Default_Options = '-i' 
 let Grep_Skip_Files = '*.bak *~ *.jar' 
 map <silent> <C-Right> <c-w>l
@@ -187,8 +178,6 @@ nmap <silent> <C-k> <C-w>k
 nmap <silent> <C-j> <C-w>j
 nmap <silent> <C-h> <C-w>h
 nmap <silent> <C-l> <C-w>l
-nmap <silent> <F6> :FSHere<cr>
-nmap <silent> <leader>h :FSHere<cr>
 nmap <silent> <C-g> :nohl<CR><C-l>
 
 let g:rails_projections = {
@@ -212,4 +201,3 @@ let g:rails_projections = {
 \  "test/blueprints/*.rb": {
 \    "command": "blueprint",},
 \ }
-let NERDTreeHijackNetrw=1
