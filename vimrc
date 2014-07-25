@@ -13,6 +13,14 @@ Plugin 'honza/vim-snippets'
 Plugin 'rking/ag.vim'
 Plugin 'spf13/vim-preview'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'bitc/vim-hdevtools'
+Plugin 'scrooloose/syntastic'
+Plugin 'Twinside/vim-haskellFold'
+Plugin 'lukerandall/haskellmode-vim'
+Plugin 'klen/python-mode'
+Plugin 'godlygeek/tabular'
+Plugin 'sjl/gundo.vim'
 call vundle#end()
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -202,3 +210,21 @@ let g:rails_projections = {
 \  "test/blueprints/*.rb": {
 \    "command": "blueprint",},
 \ }
+
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+au FileType haskell nnoremap <buffer> <F9> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <S-F9> :HdevtoolsClear<CR>
+
+" Python mode
+let g:pymode_options_max_line_length = 79
+let g:pymode_trim_whitespaces = 1
+let g:pymode_motion = 1
+let g:pymode_folding = 1
+let g:pymode_indent = 1
+let g:pymode_doc = 1
+let g:pymode_doc_bind = 'K'
+let g:pymode_run = 1
+let g:pymode_lint_options_mccabe = { 'complexity': 10 }
+let g:pymode_rope = 1
+let g:pymode_rope_completion = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']

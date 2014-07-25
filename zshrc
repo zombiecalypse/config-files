@@ -48,7 +48,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby)
+plugins=(gitfast ruby bundler rails autopep8 fasd catimg command-not-found coffee debian gem git-extras github jsontools lein pip python rvm sudo tmux vi-mode web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,9 +123,16 @@ alias rs='rails s'
 alias :q="echo \"Calm down, you're not in vim\""
 alias gg='gitg'
 alias clip='xclip -selection clipboard'
-alias zz='zeus'
 alias push='rspec spec && git push'
 alias z='j'
 alias ack='ack-grep'
 export GOPATH=$GOPATH:~/.gopath:.
 export PATH=$PATH:/usr/share/go/bin
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+unalias ag
