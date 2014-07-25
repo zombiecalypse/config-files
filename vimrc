@@ -21,6 +21,7 @@ Plugin 'lukerandall/haskellmode-vim'
 Plugin 'klen/python-mode'
 Plugin 'godlygeek/tabular'
 Plugin 'sjl/gundo.vim'
+Plugin 'nelstrom/vim-markdown-folding'
 call vundle#end()
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -98,10 +99,8 @@ set nu
 "  ---------------------------------------------------------------------------
 map		<silent>	<F2>	:write<CR>
 map		<silent>	<F3>	:Gdiff<CR>
-map 		<silent>	<F5>	:Git cola<CR>
-imap 		<silent>	<F5>	<Esc><Esc>:Git cola<CR>
-noremap		<silent>	<F11>	<Esc><Esc>:TlistToggle<CR>
-inoremap	<silent>	<F11>	<Esc><Esc>:TlistToggle<CR>
+map 		<silent>	<F5>	:Gstatus<CR>
+imap 		<silent>	<F5>	<Esc><Esc>:Gstatus<CR>
 "
 imap		<silent>	<F2>	<Esc>:write<CR>
 
@@ -188,6 +187,7 @@ nmap <silent> <C-j> <C-w>j
 nmap <silent> <C-h> <C-w>h
 nmap <silent> <C-l> <C-w>l
 nmap <silent> <C-g> :nohl<CR><C-l>
+nmap <silent> <space> za
 
 let g:rails_projections = {
 \  "app/jobs/*.rb": {
