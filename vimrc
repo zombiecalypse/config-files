@@ -166,16 +166,10 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 au FileType haskell nnoremap <buffer> <F9> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <S-F9> :HdevtoolsClear<CR>
 
-" Python mode
-let g:pymode_options_max_line_length = 79
-let g:pymode_trim_whitespaces = 1
-let g:pymode_motion = 1
+let g:pymode_indent = 0
 let g:pymode_folding = 1
-let g:pymode_indent = 1
 let g:pymode_doc = 1
-let g:pymode_doc_bind = 'K'
-let g:pymode_run = 1
-let g:pymode_lint_options_mccabe = { 'complexity': 10 }
-let g:pymode_rope = 1
-let g:pymode_rope_completion = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_on_write = 0
+let g:pymode_rope_complete_on_dot=0
+let pymode_rope_local_prefix = '<C-x> r'
+
