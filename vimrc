@@ -166,6 +166,23 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 au FileType haskell nnoremap <buffer> <F9> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <S-F9> :HdevtoolsClear<CR>
 
+autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+highlight EOLWS ctermbg=red guibg=red
+
+function! <SID>StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nmap <silent> <Leader><space> :call <SID>StripTrailingWhitespace()<CR>
+
 set noautochdir
 
 let g:netrw_list_hide='.*\.swp$,.*~$,.*\.hi$,.*\.o$,\.hpc.*$,\.pyc$'
