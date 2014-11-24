@@ -1,6 +1,8 @@
 runtime! debian.vim
 filetype off                  " required!
 
+let g:jedi#auto_initialization = 0
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
@@ -26,8 +28,8 @@ Plugin 'klen/python-mode'
 Plugin 'bogado/file-line'
 Plugin 'python-rope/ropemode'
 Plugin 'python-rope/ropevim'
+Plugin 'Twinside/vim-hoogle'
 call vundle#end()
-set rtp+=~/.vim/bundle/Vundle.vim
 
 filetype plugin indent on
 let mapleader=","
