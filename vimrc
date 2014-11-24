@@ -166,6 +166,14 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 au FileType haskell nnoremap <buffer> <F9> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <S-F9> :HdevtoolsClear<CR>
 
+set noautochdir
+
+let g:netrw_list_hide='.*\.swp$,.*~$,.*\.hi$,.*\.o$,\.hpc.*$,\.pyc$'
+nmap <silent> <A-k> :wincmd k<CR>
+nmap <silent> <A-j> :wincmd j<CR>
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-l> :wincmd l<CR>
+source /usr/share/vim/google/google.vim
 let g:pymode_indent = 0
 let g:pymode_folding = 1
 let g:pymode_doc = 1
