@@ -143,8 +143,8 @@ map <leader>cp :w !xsel -i -p<CR>
 map <leader>pp :r!xsel -p<CR>
 set wildmode=longest,list,full
 set wildmenu
-let Grep_Default_Options = '-i' 
-let Grep_Skip_Files = '*.bak *~ *.jar' 
+let Grep_Default_Options = '-i'
+let Grep_Skip_Files = '*.bak *~ *.jar'
 map <silent> <C-Right> <c-w>l
 map <silent> <C-Left> <c-w>h
 map <silent> <C-Up> <c-w>k
@@ -161,28 +161,6 @@ nmap <silent> <C-h> <C-w>h
 nmap <silent> <C-l> <C-w>l
 nmap <silent> <C-g> :nohl<CR><C-l>
 nmap <silent> <space> za
-
-let g:rails_projections = {
-\  "app/jobs/*.rb": {
-\    "command": "jobs",
-\    "template": "class %S < BaseJob\nend",
-\    "test": [
-\      "spec/jobs/%s_spec.rb"] },
-\  "app/domain/*.rb": {
-\    "command": "domain",
-\    "template": "module %S\nend",
-\    "test": [
-\      "spec/domain/%s_spec.rb"] },
-\  "app/utils/*.rb": {
-\    "command": "utils",
-\    "template": "module %S\nend",
-\    "test": [
-\      "spec/utils/%s_spec.rb"] },
-\  "config/*.rb": {
-\    "command": "config",},
-\  "test/blueprints/*.rb": {
-\    "command": "blueprint",},
-\ }
 
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
 au FileType haskell nnoremap <buffer> <F9> :HdevtoolsType<CR>
