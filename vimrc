@@ -173,3 +173,11 @@ let g:pymode_lint_on_write = 0
 let g:pymode_rope_complete_on_dot=0
 let pymode_rope_local_prefix = '<C-x> r'
 
+if &diff
+  nmap <silent> <leader>1 :diffget LO<CR>
+  nmap <silent> <leader>2 :diffget BA<CR>
+  nmap <silent> <leader>3 :diffget RE<CR>
+  vmap <silent> <leader>1 :diffget LO<CR>
+  vmap <silent> <leader>2 :diffget BA<CR>
+  vmap <silent> <leader>3 :diffget RE<CR>
+endif
