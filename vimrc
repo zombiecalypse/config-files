@@ -92,7 +92,6 @@ set autowrite	" Automatically save before commands like :next and :make
 set mouse=a	" Enable mouse usage (all modes) in terminals
 set acd
 set hidden
-set dir=/tmp,.,/var/tmp
 set fo=tcroq
 set list listchars=tab:»·,trail:·,extends:↪,precedes:↩
 colorscheme pyte
@@ -126,38 +125,6 @@ set statusline=%F%m%r%h%w\ -\ %{fugitive#statusline()}%=%v-%l[%p%%]
 "
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 
-" ----------------------------------------------------------------------------
-"  me
-" ----------------------------------------------------------------------------
-let s:AuthorName	= 'Aaron Karper'
-let s:AuthorRef		= 'AK'
-let s:Company		= 'Universität Bern'
-let s:Email		= 'aaron@karper.ch'
-" ---------------------------------------------------------------------------
-"  bash me
-" ---------------------------------------------------------------------------
-let g:BASH_AuthorName	= s:AuthorName
-let g:BASH_AuthorRef	= s:AuthorRef
-let g:BASH_Company	= s:Company
-let g:BASH_Email	= s:Email
-" ---------------------------------------------------------------------------
-"  py me
-" ---------------------------------------------------------------------------
-let g:Python_AuthorName	= s:AuthorName
-let g:Python_AuthorRef	= s:AuthorRef
-let g:Python_Company	= s:Company
-let g:Python_Email	= s:Email
-" ---------------------------------------------------------------------------
-" IDE VIM
-" ---------------------------------------------------------------------------
-let g:proj_window_width = 30 
-let g:proj_window_increment = 50
-" ---------------------------------------------------------------------------
-"  Template
-" ---------------------------------------------------------------------------
-let g:tskelUserName  = s:AuthorName
-let g:tskelUserEmail = s:Email
-let g:tskelUserWWW   = 'aaron.karper.ch'
 "
 " Source a global configuration file if available
 if filereadable("/etc/vimrc")
