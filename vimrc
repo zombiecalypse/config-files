@@ -117,7 +117,7 @@ au FileType markdown imap <silent> <F9> <Esc>:!see-markdown %<CR>
 " ----------------------------------------------------------------------------
 " filename completition
 set wildmenu
-set wildignore=*.bak,*.o,*.e,*~
+set wildignore=*.bak,*.o,*.e,*~,*.hi
 " ----------------------------------------------------------------------------
 " Git statusline
 set laststatus=2
