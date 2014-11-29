@@ -136,5 +136,10 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 unalias ag
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+  eval `ssh-agent`
+  ssh-add
+fi
 HISTSIZE=1000000
 SAVEHIST=1000000
