@@ -29,6 +29,10 @@ Plugin 'bogado/file-line'
 Plugin 'python-rope/ropemode'
 Plugin 'python-rope/ropevim'
 Plugin 'Twinside/vim-hoogle'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/vimproc'
+Plugin 'eagletmt/ghcmod-vim'
 call vundle#end()
 
 filetype plugin indent on
@@ -111,6 +115,8 @@ imap		<silent>	<F2>	<Esc>:write<CR>
 
 map 		<silent>	<F9>	:make<CR>
 imap 		<silent>	<F9>	<Esc>:make<CR>
+map 		<silent>	<F8>	:TagbarToggle<CR>
+imap 		<silent>	<F8>	<Esc>:TagbarToggle<CR>
 
 au FileType markdown map <silent> <F9> :!see-markdown %<CR>
 au FileType markdown imap <silent> <F9> <Esc>:!see-markdown %<CR>
@@ -206,3 +212,9 @@ if &diff
   vmap <silent> <leader>2 :diffget BA<CR>
   vmap <silent> <leader>3 :diffget RE<CR>
 endif
+set tags=./tags,tags;
+
+map <silent> <Leader>e :Errors<CR>
+map <Leader>s :SyntasticToggleMode<CR>
+map <silent> tu :call GHC_BrowseAll()<CR>
+map <silent> tw :call GHC_ShowType(1)<CR>
