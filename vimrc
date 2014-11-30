@@ -8,6 +8,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails.git'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-dispatch'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'rking/ag.vim'
@@ -22,6 +23,7 @@ Plugin 'klen/python-mode'
 Plugin 'godlygeek/tabular'
 Plugin 'sjl/gundo.vim'
 Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'Twinside/vim-haskellConceal'
 call vundle#end()
 set rtp+=~/.vim/bundle/Vundle.vim
 
