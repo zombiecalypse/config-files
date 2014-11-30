@@ -197,7 +197,6 @@ nmap <silent> <A-k> :wincmd k<CR>
 nmap <silent> <A-j> :wincmd j<CR>
 nmap <silent> <A-h> :wincmd h<CR>
 nmap <silent> <A-l> :wincmd l<CR>
-source /usr/share/vim/google/google.vim
 let g:pymode_indent = 0
 let g:pymode_folding = 1
 let g:pymode_indent = 1
