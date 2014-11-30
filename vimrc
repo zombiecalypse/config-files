@@ -1,6 +1,8 @@
 runtime! debian.vim
 filetype off                  " required!
 
+let g:jedi#auto_initialization = 0
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
@@ -9,6 +11,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails.git'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'rking/ag.vim'
@@ -16,14 +19,20 @@ Plugin 'spf13/vim-preview'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'bitc/vim-hdevtools'
-Plugin 'scrooloose/syntastic'
 Plugin 'Twinside/vim-haskellFold'
 Plugin 'lukerandall/haskellmode-vim'
-Plugin 'klen/python-mode'
 Plugin 'godlygeek/tabular'
 Plugin 'sjl/gundo.vim'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'Twinside/vim-haskellConceal'
+Plugin 'klen/python-mode'
+Plugin 'bogado/file-line'
+Plugin 'python-rope/ropemode'
+Plugin 'python-rope/ropevim'
+Plugin 'Twinside/vim-hoogle'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/vimproc'
+Plugin 'eagletmt/ghcmod-vim'
 call vundle#end()
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -88,7 +97,6 @@ set autowrite	" Automatically save before commands like :next and :make
 set mouse=a	" Enable mouse usage (all modes) in terminals
 set acd
 set hidden
-set dir=/tmp,.,/var/tmp
 set fo=tcroq
 set list listchars=tab:»·,trail:·,extends:↪,precedes:↩
 colorscheme pyte
@@ -108,13 +116,15 @@ imap		<silent>	<F2>	<Esc>:write<CR>
 
 map 		<silent>	<F9>	:make<CR>
 imap 		<silent>	<F9>	<Esc>:make<CR>
+map 		<silent>	<F8>	:TagbarToggle<CR>
+imap 		<silent>	<F8>	<Esc>:TagbarToggle<CR>
 
 au FileType markdown map <silent> <F9> :!see-markdown %<CR>
 au FileType markdown imap <silent> <F9> <Esc>:!see-markdown %<CR>
 " ----------------------------------------------------------------------------
 " filename completition
 set wildmenu
-set wildignore=*.bak,*.o,*.e,*~
+set wildignore=*.bak,*.o,*.e,*~,*.hi
 " ----------------------------------------------------------------------------
 " Git statusline
 set laststatus=2
@@ -122,38 +132,6 @@ set statusline=%F%m%r%h%w\ -\ %{fugitive#statusline()}%=%v-%l[%p%%]
 "
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 
-" ----------------------------------------------------------------------------
-"  me
-" ----------------------------------------------------------------------------
-let s:AuthorName	= 'Aaron Karper'
-let s:AuthorRef		= 'AK'
-let s:Company		= 'Universität Bern'
-let s:Email		= 'aaron@karper.ch'
-" ---------------------------------------------------------------------------
-"  bash me
-" ---------------------------------------------------------------------------
-let g:BASH_AuthorName	= s:AuthorName
-let g:BASH_AuthorRef	= s:AuthorRef
-let g:BASH_Company	= s:Company
-let g:BASH_Email	= s:Email
-" ---------------------------------------------------------------------------
-"  py me
-" ---------------------------------------------------------------------------
-let g:Python_AuthorName	= s:AuthorName
-let g:Python_AuthorRef	= s:AuthorRef
-let g:Python_Company	= s:Company
-let g:Python_Email	= s:Email
-" ---------------------------------------------------------------------------
-" IDE VIM
-" ---------------------------------------------------------------------------
-let g:proj_window_width = 30 
-let g:proj_window_increment = 50
-" ---------------------------------------------------------------------------
-"  Template
-" ---------------------------------------------------------------------------
-let g:tskelUserName  = s:AuthorName
-let g:tskelUserEmail = s:Email
-let g:tskelUserWWW   = 'aaron.karper.ch'
 "
 " Source a global configuration file if available
 if filereadable("/etc/vimrc")
@@ -172,8 +150,8 @@ map <leader>cp :w !xsel -i -p<CR>
 map <leader>pp :r!xsel -p<CR>
 set wildmode=longest,list,full
 set wildmenu
-let Grep_Default_Options = '-i' 
-let Grep_Skip_Files = '*.bak *~ *.jar' 
+let Grep_Default_Options = '-i'
+let Grep_Skip_Files = '*.bak *~ *.jar'
 map <silent> <C-Right> <c-w>l
 map <silent> <C-Left> <c-w>h
 map <silent> <C-Up> <c-w>k
@@ -191,42 +169,54 @@ nmap <silent> <C-l> <C-w>l
 nmap <silent> <C-g> :nohl<CR><C-l>
 nmap <silent> <space> za
 
-let g:rails_projections = {
-\  "app/jobs/*.rb": {
-\    "command": "jobs",
-\    "template": "class %S < BaseJob\nend",
-\    "test": [
-\      "spec/jobs/%s_spec.rb"] },
-\  "app/domain/*.rb": {
-\    "command": "domain",
-\    "template": "module %S\nend",
-\    "test": [
-\      "spec/domain/%s_spec.rb"] },
-\  "app/utils/*.rb": {
-\    "command": "utils",
-\    "template": "module %S\nend",
-\    "test": [
-\      "spec/utils/%s_spec.rb"] },
-\  "config/*.rb": {
-\    "command": "config",},
-\  "test/blueprints/*.rb": {
-\    "command": "blueprint",},
-\ }
-
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
 au FileType haskell nnoremap <buffer> <F9> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <S-F9> :HdevtoolsClear<CR>
 
-" Python mode
-let g:pymode_options_max_line_length = 79
-let g:pymode_trim_whitespaces = 1
-let g:pymode_motion = 1
+autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+highlight EOLWS ctermbg=red guibg=red
+
+function! <SID>StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nmap <silent> <Leader><space> :call <SID>StripTrailingWhitespace()<CR>
+
+set noautochdir
+
+let g:netrw_list_hide='.*\.swp$,.*~$,.*\.hi$,.*\.o$,\.hpc.*$,\.pyc$'
+nmap <silent> <A-k> :wincmd k<CR>
+nmap <silent> <A-j> :wincmd j<CR>
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-l> :wincmd l<CR>
+source /usr/share/vim/google/google.vim
+let g:pymode_indent = 0
 let g:pymode_folding = 1
 let g:pymode_indent = 1
 let g:pymode_doc = 1
-let g:pymode_doc_bind = 'K'
-let g:pymode_run = 1
-let g:pymode_lint_options_mccabe = { 'complexity': 10 }
-let g:pymode_rope = 1
-let g:pymode_rope_completion = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_on_write = 0
+let g:pymode_rope_complete_on_dot=0
+let pymode_rope_local_prefix = '<C-x> r'
+
+if &diff
+  nmap <silent> <leader>1 :diffget LO<CR>
+  nmap <silent> <leader>2 :diffget BA<CR>
+  nmap <silent> <leader>3 :diffget RE<CR>
+  vmap <silent> <leader>1 :diffget LO<CR>
+  vmap <silent> <leader>2 :diffget BA<CR>
+  vmap <silent> <leader>3 :diffget RE<CR>
+endif
+set tags=./tags,tags;
+
+map <silent> <Leader>e :Errors<CR>
+map <Leader>s :SyntasticToggleMode<CR>
+map <silent> tu :call GHC_BrowseAll()<CR>
+map <silent> tw :call GHC_ShowType(1)<CR>

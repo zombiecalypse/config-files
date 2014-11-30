@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="dst"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -122,7 +122,7 @@ alias tst="rspec \`git diff-index HEAD --name-only | grep _spec.rb\`"
 alias rc='rails c'
 alias rs='rails s'
 alias :q="echo \"Calm down, you're not in vim\""
-alias gg='gitg'
+alias gg='gitg --all'
 alias clip='xclip -selection clipboard'
 alias push='rspec spec && git push'
 alias z='j'
@@ -137,3 +137,11 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 unalias ag
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+  eval `ssh-agent`
+  ssh-add
+fi
+zstyle ':completion:*:*:vi(m|):*' ignored-patterns '*.o' '*.hi' '*.pyc'
+HISTSIZE=1000000
+SAVEHIST=1000000
