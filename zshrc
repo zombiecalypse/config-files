@@ -139,3 +139,5 @@ fi
 zstyle ':completion:*:*:vi(m|):*' ignored-patterns '*.o' '*.hi' '*.pyc'
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+. /usr/share/autojump/autojump.zsh
