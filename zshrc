@@ -141,3 +141,5 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 . /usr/share/autojump/autojump.zsh
+unalias ai
+unalias google
