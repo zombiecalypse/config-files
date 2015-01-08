@@ -7,3 +7,6 @@
 [submodule "splitjoin.vim"]
 	path = splitjoin.vim
 	url = ./vim/bundle/splitjoin.vim
+[submodule "vim-markdown"]
+	path = vim-markdown
+	url = ./vim/bundle/vim-markdown
