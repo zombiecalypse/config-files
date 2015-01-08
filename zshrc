@@ -83,7 +83,6 @@ alias gl="git log"
 
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
 
-
 autoload -U compinit && compinit -u
 
 export pa="/home/akarper/Projects/Puzzle/weal_rails/"
@@ -143,3 +142,8 @@ SAVEHIST=1000000
 . /usr/share/autojump/autojump.zsh
 unalias ai
 unalias google
+
+function idea:() {
+  echo "$@" >> ~/Documents/Writing/ideas
+  clear
+}
