@@ -83,12 +83,6 @@ alias gl="git log"
 
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
 
-if [ -f /usr/share/autojump/autojump.sh ]; then
-  . /usr/share/autojump/autojump.sh
-else
-  echo "Please install autojump"
-fi
-
 
 autoload -U compinit && compinit -u
 
