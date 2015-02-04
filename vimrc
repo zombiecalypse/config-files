@@ -25,13 +25,15 @@ Plugin 'lukerandall/haskellmode-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'sjl/gundo.vim'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'klen/python-mode'
 Plugin 'bogado/file-line'
 Plugin 'Twinside/vim-hoogle'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/vimproc'
 Plugin 'eagletmt/ghcmod-vim'
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-glaive'
+Plugin 'google/vim-syncopate'
 call vundle#end()
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -218,3 +220,6 @@ map <silent> <Leader>e :Errors<CR>
 map <Leader>s :SyntasticToggleMode<CR>
 map <silent> tu :call GHC_BrowseAll()<CR>
 map <silent> tw :call GHC_ShowType(1)<CR>
+
+call glaive#Install()
+Glaive syncopate plugin[mappings]
