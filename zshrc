@@ -120,7 +120,7 @@ alias clip='xclip -selection clipboard'
 alias push='rspec spec && git push'
 alias z='j'
 alias ack='ack-grep'
-export GOPATH=$GOPATH:~/.gopath:.
+export GOPATH=$GOPATH:~/.gopath
 export PATH=$PATH:/usr/share/go/bin
 
 autoload -U up-line-or-beginning-search
